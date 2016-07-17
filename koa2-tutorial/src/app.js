@@ -2,7 +2,7 @@
 * @Author: fengyun2
 * @Date:   2016-07-16 19:39:57
 * @Last Modified by:   fengyun2
-* @Last Modified time: 2016-07-17 23:05:04
+* @Last Modified time: 2016-07-18 00:02:17
 */
 
 /**
@@ -11,6 +11,7 @@
 'use strict'
 import http from 'http'
 import Koa from 'koa'
+import Router from 'koa-router'
 import path from 'path'
 import views from 'koa-views'
 import convert from 'koa-convert'
@@ -20,10 +21,17 @@ import logger from 'koa-logger'
 import koaStatic from 'koa-static-plus'
 import koaOnError from 'koa-onerror'
 
-// const Router = require('koa-router')
 
 const app = new Koa()
-// const router = new Router()
+const router = new Router()
+
+/*引入路由文件*/
+
+import index from './routes/index'
+import users from './routes/users'
+
+console.log('users: ', users)
+
 app
 .use(convert(bodyParser()))  // post请求解析中间件
 .use(convert(json()))
@@ -49,13 +57,17 @@ app.use(async (ctx, next) => {
   const start = new Date()
   await next()
   const ms = new Date() - start
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
+
+// router config
+router.use('/', index.routes())
+router.use('/users', users.routes())
 
 // response router
 app.use(async (ctx, next) => {
   await require('./routes').routes()(ctx, next)
-})
+}, router.allowedMethods())
 
 // 404
 app.use(async (ctx) => {
@@ -67,14 +79,6 @@ app.use(async (ctx) => {
 app.on('error', async (err, ctx) => {
   console.log('error occured:', err)
 })
-
-// app.use(ctx => {
-//   ctx.body = 'Hello Koa'
-// })
-
-// app.listen(3000, () => {
-//   console.log(`listening at port 3000...`);
-// })
 
 const port = parseInt('3000')
 const server = http.createServer(app.callback())

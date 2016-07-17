@@ -1,21 +1,20 @@
 /*
  * @Author: fengyun2
- * @Date:   2016-07-17 22:42:51
+ * @Date:   2016-07-17 23:32:34
  * @Last Modified by:   fengyun2
- * @Last Modified time: 2016-07-17 23:49:11
+ * @Last Modified time: 2016-07-18 00:00:39
  */
 
 'use strict';
 
 import Router from 'koa-router'
-import indexCtrl from '../controllers/indexCtrl'
+import userCtrl from '../controllers/userCtrl'
 
 const router = Router()
 
-router.get('/', indexCtrl)
+router.get('/', userCtrl)
 router.get('/news', async (ctx, next) => {
   ctx.body = '我是新闻页...'
 })
-
 
 export default router

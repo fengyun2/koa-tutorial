@@ -2,7 +2,7 @@
 * @Author: fengyun2
 * @Date:   2016-07-16 19:39:57
 * @Last Modified by:   fengyun2
-* @Last Modified time: 2016-07-17 23:05:04
+* @Last Modified time: 2016-07-18 00:02:17
 */
 
 /**
@@ -11,6 +11,7 @@
 'use strict';exports.__esModule = true;var _regenerator = require('babel-runtime/regenerator');var _regenerator2 = _interopRequireDefault(_regenerator);var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 var _http = require('http');var _http2 = _interopRequireDefault(_http);
 var _koa = require('koa');var _koa2 = _interopRequireDefault(_koa);
+var _koaRouter = require('koa-router');var _koaRouter2 = _interopRequireDefault(_koaRouter);
 var _path = require('path');var _path2 = _interopRequireDefault(_path);
 var _koaViews = require('koa-views');var _koaViews2 = _interopRequireDefault(_koaViews);
 var _koaConvert = require('koa-convert');var _koaConvert2 = _interopRequireDefault(_koaConvert);
@@ -18,12 +19,19 @@ var _koaJson = require('koa-json');var _koaJson2 = _interopRequireDefault(_koaJs
 var _koaBodyparser = require('koa-bodyparser');var _koaBodyparser2 = _interopRequireDefault(_koaBodyparser);
 var _koaLogger = require('koa-logger');var _koaLogger2 = _interopRequireDefault(_koaLogger);
 var _koaStaticPlus = require('koa-static-plus');var _koaStaticPlus2 = _interopRequireDefault(_koaStaticPlus);
-var _koaOnerror = require('koa-onerror');var _koaOnerror2 = _interopRequireDefault(_koaOnerror);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _koaOnerror = require('koa-onerror');var _koaOnerror2 = _interopRequireDefault(_koaOnerror);
 
-// const Router = require('koa-router')
 
-var app = new _koa2.default();
-// const router = new Router()
+
+
+
+
+
+var _index = require('./routes/index');var _index2 = _interopRequireDefault(_index);
+var _users = require('./routes/users');var _users2 = _interopRequireDefault(_users);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var app = new _koa2.default();var router = new _koaRouter2.default(); /*引入路由文件*/
+
+console.log('users: ', _users2.default);
+
 app.
 use((0, _koaConvert2.default)((0, _koaBodyparser2.default)())) // post请求解析中间件
 .use((0, _koaConvert2.default)((0, _koaJson2.default)())).
@@ -52,10 +60,14 @@ app.use(function () {var _ref = (0, _asyncToGenerator3.default)(_regenerator2.de
             console.log(ctx.method + ' ' + ctx.url + ' - ' + ms + 'ms');case 5:case 'end':return _context.stop();}}}, _callee, undefined);}));return function (_x, _x2) {return _ref.apply(this, arguments);};}());
 
 
+// router config
+router.use('/', _index2.default.routes());
+router.use('/users', _users2.default.routes());
+
 // response router
 app.use(function () {var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(ctx, next) {return _regenerator2.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
-              require('./routes').routes()(ctx, next));case 2:case 'end':return _context2.stop();}}}, _callee2, undefined);}));return function (_x3, _x4) {return _ref2.apply(this, arguments);};}());
-
+              require('./routes').routes()(ctx, next));case 2:case 'end':return _context2.stop();}}}, _callee2, undefined);}));return function (_x3, _x4) {return _ref2.apply(this, arguments);};}(), 
+router.allowedMethods());
 
 // 404
 app.use(function () {var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(ctx) {return _regenerator2.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
@@ -67,14 +79,6 @@ app.use(function () {var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.d
 app.on('error', function () {var _ref4 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee4(err, ctx) {return _regenerator2.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
             console.log('error occured:', err);case 1:case 'end':return _context4.stop();}}}, _callee4, undefined);}));return function (_x6, _x7) {return _ref4.apply(this, arguments);};}());
 
-
-// app.use(ctx => {
-//   ctx.body = 'Hello Koa'
-// })
-
-// app.listen(3000, () => {
-//   console.log(`listening at port 3000...`);
-// })
 
 var port = parseInt('3000');
 var server = _http2.default.createServer(app.callback());
@@ -103,4 +107,5 @@ server.on('listening', function () {
 });exports.default = 
 
 app;module.exports = exports['default'];
+
 //# sourceMappingURL=app.js.map
