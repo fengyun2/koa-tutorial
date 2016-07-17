@@ -1,4 +1,4 @@
-### install 
+### install
 ```bash
 ```
 
@@ -11,6 +11,10 @@
   "koa-views": "^5.0.1"
 ```
 
+### 技术栈
+* koa
+* mongodb
+* es2015
 
 ### run
 
