@@ -6,14 +6,15 @@
 */
 
 'use strict';
-require('babel-core/register')({
-  presets: ['es2015-node5', 'stage-3']
-})
-const Koa = require('koa')
-const app = new Koa()
+require('babel-core/register')({ 
+  presets: ['es2015-node5', 'stage-3'] });
 
-app.use(ctx => {
-  ctx.body = 'Hello Koa'
-})
+var Koa = require('koa');
+var app = new Koa();
 
-app.listen(3000)
+app.use(function (ctx) {
+  ctx.body = 'Hello Koa';
+});
+
+app.listen(3000);
+//# sourceMappingURL=hello-koa.js.map

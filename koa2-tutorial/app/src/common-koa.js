@@ -6,20 +6,21 @@
 */
 
 'use strict';
-require('babel-core/register')({
-  presets: ['es2015-node5', 'stage-3']
-})
-const Koa = require('koa')
-const app = new Koa()
+require('babel-core/register')({ 
+  presets: ['es2015-node5', 'stage-3'] });
 
-app.use((ctx, next) => {
-  const start = new Date()
-  return next().then(() => {
-    const ms = new Date() - start
-    console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-  })
-})
-app.use(ctx => {
-  ctx.body = 'Hello Koa'
-})
-app.listen(3000)
+var Koa = require('koa');
+var app = new Koa();
+
+app.use(function (ctx, next) {
+  var start = new Date();
+  return next().then(function () {
+    var ms = new Date() - start;
+    console.log(ctx.method + ' ' + ctx.url + ' - ' + ms + 'ms');
+  });
+});
+app.use(function (ctx) {
+  ctx.body = 'Hello Koa';
+});
+app.listen(3000);
+//# sourceMappingURL=common-koa.js.map
