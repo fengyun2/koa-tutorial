@@ -2,7 +2,7 @@
 * @Author: fengyun2
 * @Date:   2016-07-16 19:39:57
 * @Last Modified by:   fengyun2
-* @Last Modified time: 2016-07-18 00:02:17
+* @Last Modified time: 2016-07-18 00:16:31
 */
 
 /**
@@ -29,8 +29,6 @@ var _koaOnerror = require('koa-onerror');var _koaOnerror2 = _interopRequireDefau
 
 var _index = require('./routes/index');var _index2 = _interopRequireDefault(_index);
 var _users = require('./routes/users');var _users2 = _interopRequireDefault(_users);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var app = new _koa2.default();var router = new _koaRouter2.default(); /*引入路由文件*/
-
-console.log('users: ', _users2.default);
 
 app.
 use((0, _koaConvert2.default)((0, _koaBodyparser2.default)())) // post请求解析中间件
@@ -60,24 +58,28 @@ app.use(function () {var _ref = (0, _asyncToGenerator3.default)(_regenerator2.de
             console.log(ctx.method + ' ' + ctx.url + ' - ' + ms + 'ms');case 5:case 'end':return _context.stop();}}}, _callee, undefined);}));return function (_x, _x2) {return _ref.apply(this, arguments);};}());
 
 
+app.use(router.routes(), router.allowedMethods());
+
 // router config
 router.use('/', _index2.default.routes());
 router.use('/users', _users2.default.routes());
 
 // response router
-app.use(function () {var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(ctx, next) {return _regenerator2.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
-              require('./routes').routes()(ctx, next));case 2:case 'end':return _context2.stop();}}}, _callee2, undefined);}));return function (_x3, _x4) {return _ref2.apply(this, arguments);};}(), 
-router.allowedMethods());
+/*app.use(async (ctx, next) => {
+  await require('./routes').routes()(ctx, next)
+}, router.allowedMethods())*/
+
+
 
 // 404
-app.use(function () {var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(ctx) {return _regenerator2.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
-            ctx.status = 404;_context3.next = 3;return (
-              ctx.render('404'));case 3:case 'end':return _context3.stop();}}}, _callee3, undefined);}));return function (_x5) {return _ref3.apply(this, arguments);};}());
+app.use(function () {var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(ctx) {return _regenerator2.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+            ctx.status = 404;_context2.next = 3;return (
+              ctx.render('404'));case 3:case 'end':return _context2.stop();}}}, _callee2, undefined);}));return function (_x3) {return _ref2.apply(this, arguments);};}());
 
 
 // error logger
-app.on('error', function () {var _ref4 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee4(err, ctx) {return _regenerator2.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
-            console.log('error occured:', err);case 1:case 'end':return _context4.stop();}}}, _callee4, undefined);}));return function (_x6, _x7) {return _ref4.apply(this, arguments);};}());
+app.on('error', function () {var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(err, ctx) {return _regenerator2.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+            console.log('error occured:', err);case 1:case 'end':return _context3.stop();}}}, _callee3, undefined);}));return function (_x4, _x5) {return _ref3.apply(this, arguments);};}());
 
 
 var port = parseInt('3000');
@@ -107,5 +109,4 @@ server.on('listening', function () {
 });exports.default = 
 
 app;module.exports = exports['default'];
-
 //# sourceMappingURL=app.js.map

@@ -2,7 +2,7 @@
 * @Author: fengyun2
 * @Date:   2016-07-16 19:39:57
 * @Last Modified by:   fengyun2
-* @Last Modified time: 2016-07-18 00:02:17
+* @Last Modified time: 2016-07-18 00:16:31
 */
 
 /**
@@ -29,8 +29,6 @@ const router = new Router()
 
 import index from './routes/index'
 import users from './routes/users'
-
-console.log('users: ', users)
 
 app
 .use(convert(bodyParser()))  // post请求解析中间件
@@ -60,14 +58,18 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
+app.use(router.routes(), router.allowedMethods())
+
 // router config
 router.use('/', index.routes())
 router.use('/users', users.routes())
 
 // response router
-app.use(async (ctx, next) => {
+/*app.use(async (ctx, next) => {
   await require('./routes').routes()(ctx, next)
-}, router.allowedMethods())
+}, router.allowedMethods())*/
+
+
 
 // 404
 app.use(async (ctx) => {

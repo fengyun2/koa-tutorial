@@ -18,5 +18,4 @@ router.get('/news', function () {var _ref = (0, _asyncToGenerator3.default)(_reg
 
 
 router;module.exports = exports['default'];
-
 //# sourceMappingURL=users.js.map
