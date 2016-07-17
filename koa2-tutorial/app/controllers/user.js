@@ -14,4 +14,8 @@ const user1 = serviceUser.find({
     name: 'freewolf'
 })
 
-console.log('user1: ', user1)
+user1.then(function(value){
+  console.log(value)
+}, function(value) {
+  console.log(value)
+})

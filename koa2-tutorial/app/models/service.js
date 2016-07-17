@@ -1,57 +1,57 @@
 const ObjectID = require('mongodb').ObjectID,
     mongodb = require('./db')
 
-const config = {
+module.exports = {
     // 创建
-    insert: async(obj) => {
-        const res = await mongodb.insert('users', obj)
+    insert: async function(obj) {
+        const res = await mongodb.insert(this.collectionName, obj)
         return res
     },
 
     // 更新
-    update: async(obj) => {
-        const res = await mongodb.update('users', obj)
+    update: async function(obj) {
+        const res = await mongodb.update(this.collectionName, obj)
         return res
     },
 
     // 删除
-    remove: async(id) => {
-        const res = await mongodb.remove('users', {
+    remove: async function(id) {
+        const res = await mongodb.remove(this.collectionName, {
             _id: new ObjectID(id)
         })
         return res
     },
 
     // 查询多条
-    find: async(query, option) => {
-        const res = await mongodb.find('users', query, option)
+    find: async function(query, option) {
+        const res = await mongodb.find(this.collectionName, query, option)
         return res
     },
 
     // 查询单条
-    findOne: async(query, option) => {
-        const res = await mongodb.findOne('users', query, option)
+    findOne: async function(query, option) {
+        const res = await mongodb.findOne(this.collectionName, query, option)
         return res
     },
 
     // 获取全部
-    getAll: async() => {
-        const res = await mongodb.find('users', {})
+    getAll: async function() {
+        const res = await mongodb.find(this.collectionName, {})
     },
 
     // 按id查询
-    getById: async(id) => {
-        const res = await mongodb.findOne('users', {
+    getById: async function(id) {
+        const res = await mongodb.findOne(this.collectionName, {
             _id: new ObjectID(id)
         })
     },
 
     // 按照很多id来查询
-    getByIds: async(ids, option) => {
-        ids = ids.map((id) => {
+    getByIds: async function(ids, option) {
+        ids = ids.map(function (id) {
             new ObjectID(id)
         })
-        const res = await mongodb.find('users', {
+        const res = await mongodb.find(this.collectionName, {
             _id: {
                 $in: ids
             }
@@ -60,7 +60,7 @@ const config = {
     },
 
     // 列出(带分页)
-    getByPage: async(query, sort, pageSize, pageNum) => {
+    getByPage: async function(query, sort, pageSize, pageNum) {
         if (!query) query = {}
         if (!sort) sort = [
             ['_id', 'desc']
@@ -70,15 +70,13 @@ const config = {
             limit: pageSize,
             skip: (pageNum - 1) * pageSize
         }
-        const res = await mongodb.find('users', query, option)
+        const res = await mongodb.find(this.collectionName, query, option)
         return res
     },
 
     // 计数
-    count: async(query) => {
+    count: async function(query) {
         if (!query) query = {}
-        const res = await mongodb.count('users', query)
+        const res = await mongodb.count(this.collectionName, query)
     }
 }
-
-module.exports = config
