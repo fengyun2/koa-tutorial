@@ -8,11 +8,12 @@
 'use strict';
 
 import Router from 'koa-router'
-import userCtrl from '../controllers/userCtrl'
+import {list, add} from '../controllers/userCtrl'
 
 const router = Router()
 
-router.get('/', userCtrl)
+router.get('/', list)
+router.get('/add', add)
 router.get('/news', async (ctx, next) => {
   ctx.body = '我是新闻页...'
 })
