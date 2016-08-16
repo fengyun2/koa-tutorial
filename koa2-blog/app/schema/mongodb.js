@@ -20,5 +20,4 @@ db.on('open', function () {
 {
     db: db,
     Schema: Schema };module.exports = exports['default'];
-
 //# sourceMappingURL=mongodb.js.map

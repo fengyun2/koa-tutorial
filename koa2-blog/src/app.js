@@ -72,9 +72,9 @@ app.use(async(ctx, next) => {
 //设置一个签名 Cookie 的秘钥,也可以借助KeyGrip生成你想的一个实例
 app.keys = ['keys', 'koa2-blog'];
 //setting session
-app.use(session({
+app.use(convert(session({
     store: new MongoStore()
-}));
+})));
 
 
 // 路由中间件

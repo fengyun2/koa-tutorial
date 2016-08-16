@@ -72,8 +72,8 @@ app.use(function () {var _ref = (0, _asyncToGenerator3.default)(_regenerator2.de
 //设置一个签名 Cookie 的秘钥,也可以借助KeyGrip生成你想的一个实例
 app.keys = ['keys', 'koa2-blog'];
 //setting session
-app.use((0, _koaGenericSession2.default)({
-    store: new _koaGenericSessionMongo2.default() }));
+app.use((0, _koaConvert2.default)((0, _koaGenericSession2.default)({
+    store: new _koaGenericSessionMongo2.default() })));
 
 
 
