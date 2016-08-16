@@ -12,7 +12,7 @@ import './mongodb';
 // mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
-mongoose.connect('mongodb://localhost/koa2');
+// mongoose.connect('mongodb://localhost/koa2');
 
 /**
  * Blog Schema

@@ -12,11 +12,11 @@ require('./mongodb');function _interopRequireDefault(obj) {return obj && obj.__e
 // mongoose.Promise = global.Promise;
 var Schema = _mongoose2.default.Schema;
 
-_mongoose2.default.connect('mongodb://localhost/koa2');
+// mongoose.connect('mongodb://localhost/koa2');
 
 /**
-                                                         * Blog Schema
-                                                         */
+ * Blog Schema
+ */
 var BlogSchema = new Schema({
     title: {
         type: String,
