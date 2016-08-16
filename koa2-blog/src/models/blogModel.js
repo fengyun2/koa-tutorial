@@ -32,10 +32,10 @@ import blogModel from '../schema/blogSchema.js';
  * 【添加blog】
  * @param blog {object}
  */
-const save = function(blog) {
+const save = (blog) => {
     var action = new blogModel(blog);
     return new Promise((resolve, reject) => {
-        action.save(function(err, result) {
+        action.save((err, result) => {
             if (err) {
                 return reject({ err: err.errors, message: err.message, status: -99 });
             }
@@ -50,12 +50,20 @@ const save = function(blog) {
  * @param fields     {object} 过滤字段
  * @param options    {object} 其他操作
  */
-const find = function(conditions, fields, options) {
+const find = (conditions, fields, options) => {
     //exec 返回promise实例
     return blogModel.find(conditions, fields, options).exec();
+};
+
+/**
+ * 【根据名称查找】
+ */
+const findByName = (name, cb) => {
+    return blogModel.findByName(name, cb);
 };
 
 export default {
     save,
     find,
+    findByName,
 };

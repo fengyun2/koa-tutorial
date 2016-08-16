@@ -8,15 +8,21 @@
 'use strict';
 
 import mongoose from 'mongoose';
-mongoose.Promise = global.Promise;
+import './mongodb';
+// mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 
 mongoose.connect('mongodb://localhost/koa2');
 
+/**
+ * Blog Schema
+ */
 const BlogSchema = new Schema({
     title: {
         type: String,
         required: true,
+        default: '',
+        trim: true,
     },
     slug: {
         type: String,
@@ -55,5 +61,49 @@ const BlogSchema = new Schema({
         ref: 'Users'
     }
 });
+
+// TODO:
+
+/**
+ * Validations
+ */
+
+
+/**
+ * Middleware
+ */
+
+
+/**
+ * Pre-save hook
+ */
+BlogSchema.pre('save', (next) => {
+    console.log(`亲, 你正在保存文章...`);
+    next();
+});
+/**
+ * Pre-remove hook
+ */
+BlogSchema.pre('remove', (next) => {
+    next();
+});
+
+
+/**
+ * Methods
+ */
+BlogSchema.methods = {
+
+};
+
+
+/**
+ * Statics
+ */
+BlogSchema.statics = {
+    findByName(name, cb) {
+        this.find({ title: new RegExp(name, 'i') }, cb);
+    }
+};
 
 export default mongoose.model('Blogs', BlogSchema);

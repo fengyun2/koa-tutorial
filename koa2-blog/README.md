@@ -12,6 +12,7 @@
 ```
 
 ### 技术栈
+
 * koa
 * mongodb
 * es2015
@@ -24,3 +25,7 @@ babel-node app.js
 
 ### bug
 fix routes
+
+### 日志
+
+* 2016-08-16 去掉ejs模板,实现前后端分离

@@ -7,17 +7,14 @@ const add = (blog) => {
 };
 
 const list = (conditions, fields, options) => {
-
-    /*    const result = Blog.find(conditions, fields, options);
-        result.then(function(value) {
-            console.log('111', value)
-        }, function(value) {
-            console.log('222', value)
-        })*/
     return Blog.find(conditions, fields, options);
 };
 
+const findByName = (name, cb) => {
+    return Blog.findByName(name, cb);
+}
 export default {
     add,
     list,
+    findByName,
 };

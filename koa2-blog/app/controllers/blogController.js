@@ -27,27 +27,24 @@ var add = function () {var _ref = (0, _asyncToGenerator3.default)(_regenerator2.
 
 
 
-var list = function () {var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(ctx, next) {var conditions, fields, options, result;return _regenerator2.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+var list = function () {var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(ctx, next) {var conditions, fields, options, result, resultByName;return _regenerator2.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
                         conditions = { "state": "published" };
                         fields = { _id: 0 };
-                        options = { skip: 0, limit: 2 };
-                        console.log('before 444 <==');_context2.prev = 4;
+                        options = { skip: 0, limit: 2 };_context2.prev = 3;_context2.next = 6;return (
 
-                        console.log('try before <== ' + _blogService2.default.list());_context2.next = 8;return (
-                            _blogService2.default.list(conditions, fields, options));case 8:result = _context2.sent;
-                        console.log('get result <==');
+                            _blogService2.default.list(conditions, fields, options));case 6:result = _context2.sent;_context2.next = 9;return (
+
+                            _blogService2.default.findByName('宝宝', function (err, blogs) {
+                                if (err) console.error('err: ' + err.message);
+                                console.log('blogs: ' + blogs);
+                            }));case 9:resultByName = _context2.sent;
                         ctx.body = {
                             tag: 'success',
                             status: 1,
                             message: '查询成功!',
                             data: result };
 
-                        /*        result.then(function(value) {
-                                                            console.log('111', value)
-                                                        }, function(value) {
-                                                            console.log('222', value)
-                                                        })*/
-                        console.log('result: ' + result);_context2.next = 18;break;case 14:_context2.prev = 14;_context2.t0 = _context2['catch'](4);
+                        console.log('result: ' + result);_context2.next = 18;break;case 14:_context2.prev = 14;_context2.t0 = _context2['catch'](3);
 
                         console.error('list error: ' + _context2.t0);
                         ctx.body = {
@@ -57,7 +54,7 @@ var list = function () {var _ref2 = (0, _asyncToGenerator3.default)(_regenerator
 
 
 
-                        console.log(444);case 19:case 'end':return _context2.stop();}}}, _callee2, undefined, [[4, 14]]);}));return function list(_x3, _x4) {return _ref2.apply(this, arguments);};}();exports.default =
+                        console.log(444);case 19:case 'end':return _context2.stop();}}}, _callee2, undefined, [[3, 14]]);}));return function list(_x3, _x4) {return _ref2.apply(this, arguments);};}();exports.default =
 
 
 

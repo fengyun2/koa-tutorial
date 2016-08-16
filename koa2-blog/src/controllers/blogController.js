@@ -31,22 +31,19 @@ const list = async(ctx, next) => {
     let conditions = { "state": "published" };
     let fields = { _id: 0 };
     let options = { skip: 0, limit: 2 };
-    console.log('before 444 <==')
     try {
-        console.log(`try before <== ${blogService.list()}`);
         const result = await blogService.list(conditions, fields, options);
-        console.log(`get result <==`);
+
+        const resultByName = await blogService.findByName('宝宝', (err, blogs) => {
+            if (err) console.error(`err: ${err.message}`);
+            console.log(`blogs: ${blogs}`);
+        });
         ctx.body = {
-                tag: 'success',
-                status: 1,
-                message: '查询成功!',
-                data: result,
-            }
-            /*        result.then(function(value) {
-                            console.log('111', value)
-                        }, function(value) {
-                            console.log('222', value)
-                        })*/
+            tag: 'success',
+            status: 1,
+            message: '查询成功!',
+            data: result,
+        }
         console.log(`result: ${result}`);
     } catch (err) {
         console.error(`list error: ${err}`);

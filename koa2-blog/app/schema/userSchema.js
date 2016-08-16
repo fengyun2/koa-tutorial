@@ -8,10 +8,11 @@
 'use strict';exports.__esModule = true;
 
 var _mongoose = require('mongoose');var _mongoose2 = _interopRequireDefault(_mongoose);
+require('./mongodb');
 
 
-var _bcryptjs = require('bcryptjs');var _bcryptjs2 = _interopRequireDefault(_bcryptjs);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}_mongoose2.default.Promise = global.Promise;var Schema = _mongoose2.default.Schema;
-_mongoose2.default.connect('mongodb://localhost/koa2');
+var _bcryptjs = require('bcryptjs');var _bcryptjs2 = _interopRequireDefault(_bcryptjs);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // mongoose.Promise = global.Promise;
+var Schema = _mongoose2.default.Schema; // mongoose.connect('mongodb://localhost/koa2');
 
 var UserSchema = new Schema({
     name: {

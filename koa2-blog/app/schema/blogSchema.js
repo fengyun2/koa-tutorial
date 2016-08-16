@@ -7,16 +7,22 @@
 ///<reference path="../../typings/index.d.ts" />
 'use strict';exports.__esModule = true;
 
-var _mongoose = require('mongoose');var _mongoose2 = _interopRequireDefault(_mongoose);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-_mongoose2.default.Promise = global.Promise;
+var _mongoose = require('mongoose');var _mongoose2 = _interopRequireDefault(_mongoose);
+require('./mongodb');function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+// mongoose.Promise = global.Promise;
 var Schema = _mongoose2.default.Schema;
 
 _mongoose2.default.connect('mongodb://localhost/koa2');
 
+/**
+                                                         * Blog Schema
+                                                         */
 var BlogSchema = new Schema({
     title: {
         type: String,
-        required: true },
+        required: true,
+        default: '',
+        trim: true },
 
     slug: {
         type: String,
@@ -52,8 +58,52 @@ var BlogSchema = new Schema({
     updatedBy: {
         type: String,
         required: true,
-        ref: 'Users' } });exports.default =
+        ref: 'Users' } });
 
+
+
+// TODO:
+
+/**
+ * Validations
+ */
+
+
+/**
+     * Middleware
+     */
+
+
+/**
+         * Pre-save hook
+         */
+BlogSchema.pre('save', function (next) {
+    console.log('亲, 你正在保存文章...');
+    next();
+});
+/**
+     * Pre-remove hook
+     */
+BlogSchema.pre('remove', function (next) {
+    next();
+});
+
+
+/**
+     * Methods
+     */
+BlogSchema.methods = {};
+
+
+
+
+/**
+                          * Statics
+                          */
+BlogSchema.statics = {
+    findByName: function findByName(name, cb) {
+        this.find({ title: new RegExp(name, 'i') }, cb);
+    } };exports.default =
 
 
 _mongoose2.default.model('Blogs', BlogSchema);module.exports = exports['default'];

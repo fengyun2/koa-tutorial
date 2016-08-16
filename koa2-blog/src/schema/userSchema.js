@@ -8,10 +8,11 @@
 'use strict';
 
 import mongoose from 'mongoose';
-mongoose.Promise = global.Promise;
+import './mongodb';
+// mongoose.Promise = global.Promise;
 const Schema = mongoose.Schema;
 import bcrypt from 'bcryptjs';
-mongoose.connect('mongodb://localhost/koa2');
+// mongoose.connect('mongodb://localhost/koa2');
 
 const UserSchema = new Schema({
     name: {

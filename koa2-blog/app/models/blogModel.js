@@ -53,9 +53,17 @@ var save = function save(blog) {
 var find = function find(conditions, fields, options) {
     //exec 返回promise实例
     return _blogSchema2.default.find(conditions, fields, options).exec();
+};
+
+/**
+    * 【根据名称查找】
+    */
+var findByName = function findByName(name, cb) {
+    return _blogSchema2.default.findByName(name, cb);
 };exports.default =
 
 {
     save: save,
-    find: find };module.exports = exports['default'];
+    find: find,
+    findByName: findByName };module.exports = exports['default'];
 //# sourceMappingURL=blogModel.js.map

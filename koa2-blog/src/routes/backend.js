@@ -7,9 +7,9 @@
 
 'use strict';
 
-// import User from '../controllers/user'
+import User from '../controllers/userController';
 
-import Blog from '../controllers/blogController.js';
+import Blog from '../controllers/blogController';
 
 // import { auth } from '../middlewares/auth'
 
@@ -21,11 +21,13 @@ export default function(router) {
     // 获取用户详情
     // router.get('/user/:userId', User.fetch)
     // 创建用户
-    // router.post('/user/create', User.create)
-    // 删除用户
-    // router.post('/user/delete', User.remove)
-    // 更新用户
-    // router.post('/user/update', User.update)
+    router.get('/user/register', User.register)
+        // 检测用户
+    router.get('/user/check', User.check)
+        // 删除用户
+        // router.post('/user/delete', User.remove)
+        // 更新用户
+        // router.post('/user/update', User.update)
 
     // 获取博客
     router.get('/blogs', Blog.list);

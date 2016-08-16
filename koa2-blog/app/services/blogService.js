@@ -7,17 +7,14 @@ var add = function add(blog) {
 }; ///<reference path="../../typings/index.d.ts" />
 
 var list = function list(conditions, fields, options) {
-
-    /*    const result = Blog.find(conditions, fields, options);
-                                                           result.then(function(value) {
-                                                               console.log('111', value)
-                                                           }, function(value) {
-                                                               console.log('222', value)
-                                                           })*/
     return _blogModel2.default.find(conditions, fields, options);
-};exports.default =
+};
 
+var findByName = function findByName(name, cb) {
+    return _blogModel2.default.findByName(name, cb);
+};exports.default =
 {
     add: add,
-    list: list };module.exports = exports['default'];
+    list: list,
+    findByName: findByName };module.exports = exports['default'];
 //# sourceMappingURL=blogService.js.map
