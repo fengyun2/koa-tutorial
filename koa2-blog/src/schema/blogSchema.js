@@ -7,12 +7,7 @@
 ///<reference path="../../typings/index.d.ts" />
 'use strict';
 
-import mongoose from 'mongoose';
-import './mongodb';
-// mongoose.Promise = global.Promise;
-const Schema = mongoose.Schema;
-
-// mongoose.connect('mongodb://localhost/koa2');
+import { db, Schema } from './mongodb';
 
 /**
  * Blog Schema
@@ -106,4 +101,4 @@ BlogSchema.statics = {
     }
 };
 
-export default mongoose.model('Blogs', BlogSchema);
+export default db.model('Blogs', BlogSchema);

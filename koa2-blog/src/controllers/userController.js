@@ -16,8 +16,6 @@ const register = async(ctx, next) => {
         location: 'GuangZhou',
     };
 
-    console.log('user + 1');
-
     // 返回的Promise对象,也可以使用.then().catch()
     try {
         const result = await userService.register(user);

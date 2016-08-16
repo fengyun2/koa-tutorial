@@ -7,17 +7,12 @@
 ///<reference path="../../typings/index.d.ts" />
 'use strict';exports.__esModule = true;
 
-var _mongoose = require('mongoose');var _mongoose2 = _interopRequireDefault(_mongoose);
-require('./mongodb');function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-// mongoose.Promise = global.Promise;
-var Schema = _mongoose2.default.Schema;
-
-// mongoose.connect('mongodb://localhost/koa2');
+var _mongodb = require('./mongodb');
 
 /**
- * Blog Schema
- */
-var BlogSchema = new Schema({
+                                      * Blog Schema
+                                      */
+var BlogSchema = new _mongodb.Schema({
     title: {
         type: String,
         required: true,
@@ -106,5 +101,6 @@ BlogSchema.statics = {
     } };exports.default =
 
 
-_mongoose2.default.model('Blogs', BlogSchema);module.exports = exports['default'];
+_mongodb.db.model('Blogs', BlogSchema);module.exports = exports['default'];
+
 //# sourceMappingURL=blogSchema.js.map

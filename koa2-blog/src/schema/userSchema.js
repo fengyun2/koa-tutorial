@@ -7,12 +7,8 @@
 ///<reference path="../../typings/index.d.ts" />
 'use strict';
 
-import mongoose from 'mongoose';
-import './mongodb';
-// mongoose.Promise = global.Promise;
-const Schema = mongoose.Schema;
+import { db, Schema } from './mongodb';
 import bcrypt from 'bcryptjs';
-// mongoose.connect('mongodb://localhost/koa2');
 
 const UserSchema = new Schema({
     name: {
@@ -58,4 +54,4 @@ const UserSchema = new Schema({
     }
 });
 
-export default mongoose.model('Users', UserSchema);
+export default db.model('Users', UserSchema);

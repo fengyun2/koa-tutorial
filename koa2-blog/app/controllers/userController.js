@@ -16,17 +16,15 @@ var register = function () {var _ref = (0, _asyncToGenerator3.default)(_regenera
                             location: 'GuangZhou' };
 
 
-                        console.log('user + 1');
-
                         // 返回的Promise对象,也可以使用.then().catch()
-                        _context.prev = 2;_context.next = 5;return (
-                            _userService2.default.register(user));case 5:result = _context.sent;
+                        _context.prev = 1;_context.next = 4;return (
+                            _userService2.default.register(user));case 4:result = _context.sent;
 
                         ctx.body = {
                             tag: 'success',
                             status: 1,
                             message: '注册成功!',
-                            data: result };_context.next = 13;break;case 9:_context.prev = 9;_context.t0 = _context['catch'](2);
+                            data: result };_context.next = 12;break;case 8:_context.prev = 8;_context.t0 = _context['catch'](1);
 
 
                         console.error('register error: ' + _context.t0);
@@ -34,7 +32,7 @@ var register = function () {var _ref = (0, _asyncToGenerator3.default)(_regenera
                         ctx.body = {
                             tag: 'error',
                             status: _context.t0.status,
-                            message: _context.t0.message };case 13:case 'end':return _context.stop();}}}, _callee, undefined, [[2, 9]]);}));return function register(_x, _x2) {return _ref.apply(this, arguments);};}();
+                            message: _context.t0.message };case 12:case 'end':return _context.stop();}}}, _callee, undefined, [[1, 8]]);}));return function register(_x, _x2) {return _ref.apply(this, arguments);};}();
 
 
 

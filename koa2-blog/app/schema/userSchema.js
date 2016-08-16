@@ -7,14 +7,10 @@
 ///<reference path="../../typings/index.d.ts" />
 'use strict';exports.__esModule = true;
 
-var _mongoose = require('mongoose');var _mongoose2 = _interopRequireDefault(_mongoose);
-require('./mongodb');
+var _mongodb = require('./mongodb');
+var _bcryptjs = require('bcryptjs');var _bcryptjs2 = _interopRequireDefault(_bcryptjs);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
-
-var _bcryptjs = require('bcryptjs');var _bcryptjs2 = _interopRequireDefault(_bcryptjs);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // mongoose.Promise = global.Promise;
-var Schema = _mongoose2.default.Schema; // mongoose.connect('mongodb://localhost/koa2');
-
-var UserSchema = new Schema({
+var UserSchema = new _mongodb.Schema({
     name: {
         type: String,
         required: true },
@@ -58,5 +54,5 @@ var UserSchema = new Schema({
 
 
 
-_mongoose2.default.model('Users', UserSchema);module.exports = exports['default'];
+_mongodb.db.model('Users', UserSchema);module.exports = exports['default'];
 //# sourceMappingURL=userSchema.js.map
