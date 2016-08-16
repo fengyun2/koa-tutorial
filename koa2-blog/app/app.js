@@ -21,6 +21,7 @@ var _koaLogger = require('koa-logger');var _koaLogger2 = _interopRequireDefault(
 var _koaStaticPlus = require('koa-static-plus');var _koaStaticPlus2 = _interopRequireDefault(_koaStaticPlus);
 var _koaOnerror = require('koa-onerror');var _koaOnerror2 = _interopRequireDefault(_koaOnerror);
 var _koaGenericSession = require('koa-generic-session');var _koaGenericSession2 = _interopRequireDefault(_koaGenericSession);
+var _koaGenericSessionMongo = require('koa-generic-session-mongo');var _koaGenericSessionMongo2 = _interopRequireDefault(_koaGenericSessionMongo);
 
 
 
@@ -36,14 +37,14 @@ var _response = require('./middlewares/response');function _interopRequireDefaul
 var app = new _koa2.default(); // import frontendRoutes from './routes/frontend'
 
 var backendRouter = new _koaRouter2.default({
-  prefix: "/api" });
+    prefix: "/api" });
 
 
 var frontendRouter = new _koaRouter2.default();
 
 app.
 use((0, _koaConvert2.default)((0, _koaStaticPlus2.default)(_path2.default.join(__dirname, 'public'), {
-  pathPrefix: '' })))
+    pathPrefix: '' })))
 // 静态文件指定中间件
 .use((0, _koaConvert2.default)((0, _koaBodyparser2.default)())) // post请求解析中间件
 .use((0, _koaConvert2.default)((0, _koaJson2.default)())).
@@ -52,20 +53,28 @@ use((0, _koaConvert2.default)((0, _koaLogger2.default)())) // 日志中间件
 
 // views
 app.use((0, _koaViews2.default)(_path2.default.join(__dirname, '../views'), {
-  extension: 'html' }));
+    extension: 'html' }));
 
 
 // 500 error
 (0, _koaOnerror2.default)(app, {
-  template: 'views/500.html' });
+    template: 'views/500.html' });
 
 
 // logger
 app.use(function () {var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(ctx, next) {var start, ms;return _regenerator2.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-            start = new Date();_context.next = 3;return (
-              next());case 3:
-            ms = new Date() - start;
-            console.log(ctx.method + ' ' + ctx.url + ' - ' + ms + 'ms');case 5:case 'end':return _context.stop();}}}, _callee, undefined);}));return function (_x, _x2) {return _ref.apply(this, arguments);};}());
+                        start = new Date();_context.next = 3;return (
+                            next());case 3:
+                        ms = new Date() - start;
+                        console.log(ctx.method + ' ' + ctx.url + ' - ' + ms + 'ms');case 5:case 'end':return _context.stop();}}}, _callee, undefined);}));return function (_x, _x2) {return _ref.apply(this, arguments);};}());
+
+
+//设置一个签名 Cookie 的秘钥,也可以借助KeyGrip生成你想的一个实例
+app.keys = ['keys', 'koa2-blog'];
+//setting session
+app.use((0, _koaGenericSession2.default)({
+    store: new _koaGenericSessionMongo2.default() }));
+
 
 
 // 路由中间件
@@ -81,13 +90,13 @@ app.use(backendRouter.routes(), backendRouter.allowedMethods());
 
 // 404
 app.use(function () {var _ref2 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(ctx) {return _regenerator2.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
-            ctx.status = 404;_context2.next = 3;return (
-              ctx.render('404'));case 3:case 'end':return _context2.stop();}}}, _callee2, undefined);}));return function (_x3) {return _ref2.apply(this, arguments);};}());
+                        ctx.status = 404;_context2.next = 3;return (
+                            ctx.render('404'));case 3:case 'end':return _context2.stop();}}}, _callee2, undefined);}));return function (_x3) {return _ref2.apply(this, arguments);};}());
 
 
 // error logger
 app.on('error', function () {var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3(err, ctx) {return _regenerator2.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
-            console.log('error occured:', err);case 1:case 'end':return _context3.stop();}}}, _callee3, undefined);}));return function (_x4, _x5) {return _ref3.apply(this, arguments);};}());
+                        console.log('error occured:', err);case 1:case 'end':return _context3.stop();}}}, _callee3, undefined);}));return function (_x4, _x5) {return _ref3.apply(this, arguments);};}());
 
 
 var port = parseInt('3000');
@@ -95,25 +104,25 @@ var server = _http2.default.createServer(app.callback());
 
 server.listen(port);
 server.on('error', function (error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
-  // handle specific listen errors with friendly messages
-  switch (error.code) {
-    case 'EACCES':
-      console.error(port + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(port + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;}
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case 'EACCES':
+            console.error(port + ' requires elevated privileges');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(port + ' is already in use');
+            process.exit(1);
+            break;
+        default:
+            throw error;}
 
 });
 server.on('listening', function () {
-  console.log('Listening on port: %d', port);
+    console.log('Listening on port: %d', port);
 });exports.default =
 
 app;module.exports = exports['default'];

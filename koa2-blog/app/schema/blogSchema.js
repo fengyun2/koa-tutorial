@@ -102,5 +102,4 @@ BlogSchema.statics = {
 
 
 _mongodb.db.model('Blogs', BlogSchema);module.exports = exports['default'];
-
 //# sourceMappingURL=blogSchema.js.map

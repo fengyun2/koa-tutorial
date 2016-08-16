@@ -4,7 +4,10 @@ _mongoose2.default.Promise = global.Promise;
 var Schema = _mongoose2.default.Schema;
 var mongoLink = 'mongodb://' + _mongodb2.default.host + ':' + _mongodb2.default.port + '/' + _mongodb2.default.database;
 
-var db = _mongoose2.default.createConnection(mongoLink);
+var db = _mongoose2.default.createConnection(mongoLink, function (err) {
+    if (err) throw err;
+    console.error('connect mongodb\'s database success');
+});
 
 db.on('error', function (err) {
     console.error('数据库连接失败!');
@@ -17,4 +20,5 @@ db.on('open', function () {
 {
     db: db,
     Schema: Schema };module.exports = exports['default'];
+
 //# sourceMappingURL=mongodb.js.map
