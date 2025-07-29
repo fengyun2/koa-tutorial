@@ -28,7 +28,7 @@
   "homepage": "https://github.com/fengyun2/koa-tutorial#readme",
   "dependencies": {
     "debug": "^2.2.0",
-    "koa": "^2.0.0",
+    "koa": "^3.0.1",
     "koa-bodyparser": "^3.1.0",
     "koa-convert": "^1.2.0",
     "koa-json": "^1.1.3",
